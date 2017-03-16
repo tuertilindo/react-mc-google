@@ -1,0 +1,47 @@
+{
+  "name": "react-mc-google",
+  "version": "1.0.0",
+  "description": "Google login for mascocitas",
+  "main": "main.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuertilindo/react-mc-google.git"
+  },
+  "keywords": [
+    "google",
+    "login",
+    "mascocitas",
+    "web"
+  ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "*",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0"
+
+  },
+  "author": "Tuertilindo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuertilindo/react-mc-google/issues"
+  },
+  "homepage": "https://github.com/tuertilindo/react-mc-google#readme"
+}
