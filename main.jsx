@@ -20,7 +20,9 @@ export default class Glogin {
             }
             break
           case 3:
-            this.user = this.auth2.currentUser.get()
+            let user = this.auth2.currentUser.get()
+            this.user = user.getBasicProfile()
+            this.user.access_token = user.getAuthResponse(true).access_token
             if (this.login instanceof Function) {
               this.login(this.user)
             }
@@ -80,12 +82,12 @@ export default class Glogin {
   }
   callLogin () {
     if (!this.auth2.isSignedIn.get()) {
-      this.auth2.signIn();
+      this.auth2.signIn()
     }
   }
   callLogout () {
     if (this.auth2.isSignedIn.get()) {
-      changeStatus(3)
+      this.auth2.signOut()
     }
   }
   onLogin (callback) {
