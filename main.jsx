@@ -20,9 +20,14 @@ export default class Glogin {
             }
             break
           case 3:
-            let user = this.auth2.currentUser.get()
-            this.user = user.getBasicProfile()
-            this.user.access_token = user.getAuthResponse(true).access_token
+            let guser = this.auth2.currentUser.get().getBasicProfile()
+            this.user = {
+              'id': guser.getId(),
+              'name': guser.getGivenName(),
+              'image': guser.getImageUrl(),
+              'email': guser.getEmail(),
+              'id_token': this.auth2.currentUser.get().getAuthResponse(true).id_token
+            }
             if (this.login instanceof Function) {
               this.login(this.user)
             }
