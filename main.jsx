@@ -20,7 +20,7 @@ export default class Glogin {
             }
             break
           case 3:
-            this.user = this.gapi.auth2.getAuthInstance()
+            this.user = this.auth2.currentUser.get()
             if (this.login instanceof Function) {
               this.login(this.user)
             }
@@ -39,18 +39,19 @@ export default class Glogin {
       script.src = 'https://apis.google.com/js/client:platform.js'
       this.status = 1
       script.onload = () => {
-        this.gapi = gapi
-        if (this.gapi) {
-          this.gapi.load('auth', () => {
-            this.gapi.client.init(params).then(() => {
+        var ga = gapi
+        if (ga) {
+          ga.load('auth', () => {
+            ga.client.init(params).then(() => {
+              this.auth2 = ga.auth2.getAuthInstance()
               changeStatus(2)
-              this.gapi.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
+              this.auth2.isSignedIn.listen((isSignedIn) => {
                 changeStatus(2)
                 if (isSignedIn) {
                   changeStatus(3)
                 }
               })
-              if (this.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+              if (this.auth2.isSignedIn.get()) {
                 changeStatus(3)
               } else {
                 changeStatus(2)
@@ -75,6 +76,16 @@ export default class Glogin {
         return 'online'
       default:
         return 'disconnect'
+    }
+  }
+  callLogin () {
+    if (!this.auth2.isSignedIn.get()) {
+      this.auth2.signIn();
+    }
+  }
+  callLogout () {
+    if (this.auth2.isSignedIn.get()) {
+      changeStatus(3)
     }
   }
   onLogin (callback) {
