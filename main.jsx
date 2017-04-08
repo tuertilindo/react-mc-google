@@ -71,6 +71,12 @@ export default class Glogin {
     }
     return instance
   }
+  getGoogleAuth () {
+    if (!this.auth2) {
+      this.auth2 = gapi.auth2.getAuthInstance()
+    }
+    return this.auth2
+  }
   getStatus () {
     switch (this.status) {
       case 0:
@@ -86,12 +92,12 @@ export default class Glogin {
     }
   }
   callLogin () {
-    if (!this.auth2.isSignedIn.get()) {
+    if (!this.getGoogleAuth().isSignedIn.get()) {
       this.auth2.signIn()
     }
   }
   callLogout () {
-    if (this.auth2.isSignedIn.get()) {
+    if (this.getGoogleAuth().isSignedIn.get()) {
       this.auth2.signOut()
     }
   }
