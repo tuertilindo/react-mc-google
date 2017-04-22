@@ -2,7 +2,7 @@
   "name": "react-mc-google",
   "version": "1.0.0",
   "description": "Google login for mascocitas",
-  "main": "main.jsx",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
