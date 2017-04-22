@@ -47,6 +47,9 @@ export default class Gweb extends Gbase {
     }
     document.head.appendChild(script)
   }
+  changeStatus (state, user) {
+    super.changeStatus(state, user)
+  }
   getGoogleAuth () {
     if (!this.auth2) {
       this.auth2 = gapi.auth2.getAuthInstance()

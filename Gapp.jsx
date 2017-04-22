@@ -14,17 +14,17 @@ export default class Gapp extends Gbase {
       return false
     }
     if (!window.plugins) {
-      super.changeStatus(2, null)
+      this.changeStatus(2, null)
       return false
     }
     if (silent) {
       window.plugins.googleplus.trySilentLogin(
         {},
         (guser) => {
-          super.changeStatus(3, guser)
+          this.changeStatus(3, guser)
         },
         (msg) => {
-          super.changeStatus(2, null)
+          this.changeStatus(2, null)
           console.log(msg)
         }
       )
@@ -33,14 +33,17 @@ export default class Gapp extends Gbase {
     window.plugins.googleplus.login(
       {},
       (guser) => {
-        super.changeStatus(2, guser)
+        this.changeStatus(2, guser)
       },
       (msg) => {
-        super.changeStatus(2, null)
+        this.changeStatus(2, null)
         console.log(msg)
       }
     )
     return true
+  }
+  changeStatus (state, user) {
+    super.changeStatus(state, user)
   }
   callLogin () {
     if (super.status === 1 || super.status === 3) {
@@ -52,7 +55,7 @@ export default class Gapp extends Gbase {
     if (super.status !== 3) {
       return false
     }
-    super.changeStatus(2, null)
+    this.changeStatus(2, null)
     window.plugins.googleplus.logout(
       (msg) => {
         console.log(msg)
