@@ -15,12 +15,12 @@ export default class Gweb extends Gbase {
         ga.load('auth', () => {
           ga.client.init(params).then(() => {
             this.auth2 = ga.auth2.getAuthInstance()
-            this.changeStatus(2, null)
+            this.setStatus(2, null)
             this.auth2.isSignedIn.listen((isSignedIn) => {
-              this.changeStatus(2, null)
+              this.setStatus(2, null)
               if (isSignedIn) {
                 let guser = this.auth2.currentUser.get().getBasicProfile()
-                this.changeStatus(3, {
+                this.setStatus(3, {
                   'id': guser.getId(),
                   'name': guser.getGivenName(),
                   'image': guser.getImageUrl(),
@@ -31,7 +31,7 @@ export default class Gweb extends Gbase {
             })
             if (this.auth2.isSignedIn.get()) {
               let guser = this.auth2.currentUser.get().getBasicProfile()
-              this.changeStatus(3, {
+              this.setStatus(3, {
                 'id': guser.getId(),
                 'name': guser.getGivenName(),
                 'image': guser.getImageUrl(),
@@ -39,16 +39,13 @@ export default class Gweb extends Gbase {
                 'id_token': this.auth2.currentUser.get().getAuthResponse(true).id_token
               })
             } else {
-              this.changeStatus(2, null)
+              this.setStatus(2, null)
             }
           })
         })
       }
     }
     document.head.appendChild(script)
-  }
-  changeStatus (state, user) {
-    super.changeStatus(state, user)
   }
   getGoogleAuth () {
     if (!this.auth2) {
