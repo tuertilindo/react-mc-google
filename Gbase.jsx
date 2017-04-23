@@ -6,7 +6,7 @@ export default class Gbase {
     if (!this.isMobile) {
     }
   }
-  static setStatus (state, user) {
+  setStatus (state, user) {
     this.state = state
     this.user = user
     if (this.changeStatus instanceof Function) {
@@ -33,7 +33,7 @@ export default class Gbase {
         break
     }
   }
-  static getStatus () {
+  getStatus () {
     switch (this.status) {
       case 0:
         return 'disconnect'
@@ -51,13 +51,13 @@ export default class Gbase {
   }
   callLogout () {
   }
-  static onLogin (callback) {
+  onLogin (callback) {
     this.login = callback
   }
-  static onLogout (callback) {
+  onLogout (callback) {
     this.logout = callback
   }
-  static onStatusChange (callback) {
+  onStatusChange (callback) {
     this.changeStatus = callback
   }
 }
