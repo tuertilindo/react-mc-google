@@ -16,6 +16,11 @@
     "mascocitas",
     "web"
   ],
+  "dependencies": {
+    "object-assign": "4.1.1",
+    "react": "15.4.2",
+    "reflux": "^6.4.1"
+  },
   "browserify": {
     "transform": [
       [

@@ -1,22 +1,6 @@
 import Gbase from './Gbase.jsx'
 export default class Gapp extends Gbase {
-  constructor (params) {
-    super(params)
-    document.addEventListener('deviceready', () => {
-        this.LoginWithGoogle(true)
-      }, false)
-  }
   LoginWithGoogle (silent) {
-    if (super.status === 0) {
-      return false
-    }
-    if (this.status === 3) {
-      return false
-    }
-    if (!window.plugins) {
-      this.setStatus(2, null)
-      return false
-    }
     if (silent) {
       window.plugins.googleplus.trySilentLogin(
         {},
@@ -25,7 +9,6 @@ export default class Gapp extends Gbase {
         },
         (msg) => {
           this.setStatus(2, null)
-          console.log(msg)
         }
       )
       return true
@@ -33,7 +16,13 @@ export default class Gapp extends Gbase {
     window.plugins.googleplus.login(
       {},
       (guser) => {
-        this.setStatus(2, guser)
+        let user = {
+          name: guser.givenName,
+          image: guser.imageUrl,
+          id: guser.userId,
+          id_token: guser.idToken
+        }
+        this.setStatus(3, user)
       },
       (msg) => {
         this.setStatus(2, null)

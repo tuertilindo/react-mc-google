@@ -3,11 +3,9 @@ export default class Gbase {
     this.status = 0
     this.user = null
     this.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)
-    if (!this.isMobile) {
-    }
   }
   setStatus (state, user) {
-    this.state = state
+    this.status = state
     this.user = user
     if (this.changeStatus instanceof Function) {
       this.changeStatus({
