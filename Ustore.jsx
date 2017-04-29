@@ -20,7 +20,22 @@ export default class Ustore extends Reflux.Store {
       this.UpdateUser(guser)
     })
     this.gl.onStatusChange((st) => {
-      this.setState({googleStatus: st})
+      switch (st.status) {
+        case 0:
+          this.setState({status: 'DISCONNECT'})
+          break
+        case 1:
+          this.setState({status: 'CONNECTING'})
+          break
+        case 2:
+          this.setState({status: 'OFFLINE'})
+          break
+        case 3:
+          break
+        default:
+          this.setState({status: 'DISCONNECT'})
+          break
+      }
     })
   }
   UpdateUser (user) {
