@@ -1,6 +1,7 @@
 import Reflux from 'reflux'
 let Uactions = Reflux.createActions([
   'LogIn',
-  'LogOut'
+  'LogOut',
+  'UpdateUser'
 ])
 export default Uactions
